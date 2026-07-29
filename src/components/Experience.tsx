@@ -52,44 +52,57 @@ export default function Experience() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
           {/* Experience Column */}
-          <div>
+          <div className="lg:pr-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="mb-12"
+              className="mb-10 md:mb-16"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                  <Briefcase size={28} />
+              <div className="flex items-center gap-3 md:gap-4 mb-4">
+                <div className="p-3 md:p-4 bg-primary/10 rounded-xl md:rounded-2xl text-primary shadow-sm">
+                  <Briefcase className="w-6 h-6 md:w-8 md:h-8" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">Experience</h2>
+                <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight">Experience</h2>
               </div>
             </motion.div>
 
-            <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:ml-6 md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-border before:via-border before:to-transparent">
+            <div className="space-y-10 md:space-y-12 relative before:absolute before:inset-0 before:ml-4 before:-translate-x-px md:before:ml-6 md:before:translate-x-0 before:h-full before:w-0.5 md:before:w-1 before:bg-gradient-to-b before:from-primary/50 before:via-primary/20 before:to-transparent">
               {experience.map((exp, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="relative pl-12 md:pl-16"
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="relative pl-12 md:pl-20 group"
                 >
-                  <div className={`absolute left-0 mt-1.5 h-10 w-10 md:h-12 md:w-12 rounded-full border-4 border-background flex items-center justify-center shadow-sm ${exp.highlight ? "bg-primary text-primary-foreground" : "bg-card text-primary"}`}>
-                    <div className={`w-3 h-3 rounded-full ${exp.highlight ? "bg-primary-foreground" : "bg-primary"}`} />
+                  {/* Timeline Dot */}
+                  <div className={`absolute left-0 top-2 h-8 w-8 md:h-14 md:w-14 rounded-full border-2 md:border-4 border-background flex items-center justify-center shadow-md md:shadow-xl z-10 transition-transform duration-500 md:group-hover:scale-110 ${exp.highlight ? "bg-primary text-primary-foreground" : "bg-card/80 backdrop-blur-sm text-primary"}`}>
+                    <div className={`w-2 h-2 md:w-4 md:h-4 rounded-full ${exp.highlight ? "bg-background animate-pulse" : "bg-primary/50"}`} />
                   </div>
-                  <div className={`p-6 rounded-2xl transition-colors ${exp.highlight ? "bg-primary/5 border-2 border-primary shadow-lg shadow-primary/10" : "bg-card border border-border hover:border-primary/50"}`}>
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
-                      <h3 className="text-xl font-bold text-foreground">{exp.title}</h3>
-                      <span className={`text-sm font-medium px-3 py-1 rounded-full w-fit ${exp.highlight ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"}`}>
+                  
+                  {/* Experience Card */}
+                  <div className={`p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] transition-all duration-500 relative overflow-hidden ${exp.highlight ? "bg-card/20 backdrop-blur-md border border-primary/30 shadow-xl md:shadow-2xl md:shadow-primary/10 hover:-translate-y-1 md:hover:shadow-primary/20" : "bg-card/10 backdrop-blur-md border border-border/40 hover:border-primary/30 hover:-translate-y-1 md:hover:shadow-xl"}`}>
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block" />
+                    
+                    {exp.highlight && (
+                       <div className="absolute -inset-4 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent rounded-full opacity-50 md:opacity-0 md:group-hover:opacity-50 transition-opacity duration-1000 -z-10" />
+                    )}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2 md:gap-3 relative z-20">
+                      <h3 className="text-xl md:text-2xl font-black text-foreground tracking-tight">{exp.title}</h3>
+                      <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest px-3 py-1.5 md:px-4 md:py-2 rounded-full w-fit ${exp.highlight ? "bg-primary text-primary-foreground shadow-md" : "bg-primary/10 text-primary"}`}>
                         {exp.date}
                       </span>
                     </div>
-                    <p className="text-foreground/80 font-bold mb-4">{exp.company}</p>
-                    <p className="text-foreground/70 text-sm leading-relaxed">{exp.description}</p>
+                    <p className={`font-bold mb-4 md:mb-6 text-base md:text-lg relative z-20 ${exp.highlight ? "text-primary" : "text-foreground/80"}`}>{exp.company}</p>
+                    <p className="text-foreground/70 text-sm md:text-base leading-relaxed font-medium relative z-20">{exp.description}</p>
+                    
+                    {/* Background glowing blob for highlighted cards */}
+                    {exp.highlight && (
+                       <div className="absolute -inset-4 bg-primary/10 blur-3xl rounded-full opacity-50 md:opacity-0 md:group-hover:opacity-50 transition-opacity duration-1000 -z-10" />
+                    )}
                   </div>
                 </motion.div>
               ))}
@@ -103,36 +116,41 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="mb-12"
+              className="mb-10 md:mb-16 mt-16 lg:mt-0"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                  <Award size={28} />
+              <div className="flex items-center gap-3 md:gap-4 mb-4">
+                <div className="p-3 md:p-4 bg-primary/10 rounded-xl md:rounded-2xl text-primary shadow-sm">
+                  <Award className="w-6 h-6 md:w-8 md:h-8" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">Achievements</h2>
+                <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight">Achievements</h2>
               </div>
             </motion.div>
 
-            <div className="space-y-4 mb-12">
+            <div className="space-y-4 md:space-y-6 mb-16">
               {achievements.map((achievement, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className={`flex items-start gap-4 p-6 rounded-3xl border transition-all ${
-                    achievement.highlight
-                      ? "bg-primary/10 border-primary shadow-lg shadow-primary/5"
-                      : "bg-card border-border hover:border-primary/30"
-                  }`}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className={`flex items-start gap-4 md:gap-5 p-6 md:p-8 rounded-3xl md:rounded-[2rem] border transition-all duration-500 group md:hover:-translate-y-1 relative overflow-hidden ${achievement.highlight
+                      ? "bg-card/20 backdrop-blur-2xl border-primary/40 shadow-xl shadow-primary/10"
+                      : "bg-card/10 backdrop-blur-xl border-border/40 hover:border-primary/30 hover:shadow-lg"
+                    }`}
                 >
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 hidden md:block" />
+                  
                   {achievement.highlight ? (
-                    <Award className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5 animate-pulse" />
+                    <div className="bg-amber-500/10 p-2 md:p-3 rounded-lg md:rounded-xl shrink-0 mt-1">
+                      <Award className="w-6 h-6 md:w-8 md:h-8 text-amber-500 animate-pulse" />
+                    </div>
                   ) : (
-                    <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                    <div className="bg-primary/10 p-2 md:p-3 rounded-lg md:rounded-xl shrink-0 mt-1">
+                      <CheckCircle2 className="w-6 h-6 md:w-8 md:h-8 text-primary md:group-hover:scale-110 transition-transform duration-500" />
+                    </div>
                   )}
-                  <span className={`text-lg leading-relaxed ${achievement.highlight ? "text-foreground font-semibold" : "text-foreground/80 font-medium"}`}>
+                  <span className={`text-base md:text-lg leading-relaxed ${achievement.highlight ? "text-foreground font-bold" : "text-foreground/80 font-medium"}`}>
                     {achievement.text}
                   </span>
                 </motion.div>
@@ -141,13 +159,16 @@ export default function Experience() {
 
             {/* Certifications Snapshot */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-card/5 backdrop-blur-2xl border border-border/40 rounded-[2.5rem] p-10 relative overflow-hidden group hover:border-primary/30 transition-colors duration-500"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-6">Top Certifications</h3>
-              <div className="space-y-4">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              <h3 className="text-3xl font-black text-foreground mb-8 tracking-tight">Top Certifications</h3>
+              <div className="space-y-4 relative z-10">
                 {[
                   "ITI – Yellow Belt Training Program",
                   "Machine Learning for AI",
@@ -155,13 +176,13 @@ export default function Experience() {
                   "Neural Networks and Deep Learning",
                   "Agile Development and Scrum",
                 ].map((cert, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-background border border-border rounded-xl hover:border-primary/50 transition-colors">
-                    <span className="text-foreground/80 font-medium">{cert}</span>
+                  <div key={index} className="flex items-center gap-4 p-5 bg-background/40 backdrop-blur-sm border border-border/30 rounded-2xl hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 group/cert hover:pl-6 cursor-default">
+                    <div className="w-2 h-2 rounded-full bg-primary/40 group-hover/cert:bg-primary group-hover/cert:scale-150 transition-all duration-300" />
+                    <span className="text-foreground/80 font-semibold">{cert}</span>
                   </div>
                 ))}
               </div>
             </motion.div>
-
           </div>
         </div>
       </div>

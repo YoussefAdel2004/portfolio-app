@@ -23,9 +23,10 @@ export default function Hero() {
       id="home"
       className="min-h-screen flex items-center justify-center pt-20 pb-12 px-6 md:px-12 relative overflow-hidden"
     >
-      {/* Background decoration */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] -z-10" />
+      {/* Dot Pattern & Subtle Glow for Depth - Optimized for GPU */}
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(var(--dot-color)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)]" />
+      <div className="absolute top-[-100px] left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent rounded-full -z-10 animate-[pulse_4s_ease-in-out_infinite]" />
+      <div className="absolute bottom-[-100px] right-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent rounded-full -z-10 animate-[pulse_6s_ease-in-out_infinite] delay-1000" />
 
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <motion.div
@@ -38,7 +39,7 @@ export default function Hero() {
             <h2 className="text-xl md:text-2xl font-medium text-foreground/80">
               Hello, I&apos;m
             </h2>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900 dark:from-gray-300 dark:via-white dark:to-gray-500 drop-shadow-sm">
               Youssef Adel
             </h1>
             <div className="h-10 md:h-14 overflow-hidden mt-2">
@@ -48,7 +49,7 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -50, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-2xl md:text-4xl font-semibold text-primary"
+                className="text-2xl md:text-4xl font-bold text-foreground/80 tracking-wide"
               >
                 {titles[titleIndex]}
               </motion.div>
@@ -63,15 +64,15 @@ export default function Hero() {
           <div className="flex flex-wrap items-center gap-4 pt-6">
             <a
               href="#contact"
-              className="flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold text-lg rounded-full transition-all shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] hover:-translate-y-1 w-full sm:w-auto"
+              className="group flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-medium text-lg rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:bg-primary/90 hover:-translate-y-1 w-full sm:w-auto"
             >
               Contact Me
-              <ArrowRight size={20} />
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="/Youssef_Adel_Boshra_Nashed_CV.pdf"
               download="Youssef_Adel_Boshra_Nashed_CV.pdf"
-              className="flex items-center justify-center gap-2 px-8 py-4 bg-card border border-border text-foreground hover:text-primary hover:border-primary font-semibold text-lg rounded-full transition-all hover:-translate-y-1 w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 px-8 py-4 bg-background/50 backdrop-blur-md border border-border/50 text-foreground hover:bg-foreground/5 hover:border-foreground/30 font-semibold text-lg rounded-full transition-all hover:-translate-y-1 w-full sm:w-auto"
             >
               Download CV
               <Download size={20} />
@@ -104,11 +105,12 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="flex justify-center lg:justify-end order-1 lg:order-2"
         >
-          <div className="relative w-72 h-72 md:w-96 md:h-96">
-            <div className="absolute inset-0 border-2 border-primary rounded-full animate-[spin_10s_linear_infinite] border-t-transparent border-l-transparent"></div>
-            <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-background bg-card shadow-2xl">
+          <div className="relative w-72 h-72 md:w-[400px] md:h-[400px]">
+            {/* Spinning gradient border effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-gray-300 via-gray-500 to-gray-800 dark:from-gray-800 dark:via-gray-400 dark:to-gray-900 rounded-full animate-[spin_3s_linear_infinite] opacity-50 blur-[1px]"></div>
+            <div className="absolute inset-[3px] rounded-full overflow-hidden bg-background shadow-xl">
               <Image
-                src="/profile.jpg"
+                src="/profile.png"
                 alt="Youssef Adel"
                 fill
                 className="object-cover"

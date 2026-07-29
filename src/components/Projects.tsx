@@ -32,112 +32,85 @@ const projects = [
     details: "#",
     thumbnail: "bg-orange-500/20",
     image: "/kidney.png",
-  },
-  {
-    title: "Data Center Network Design",
-    description: "Designed and simulated a scalable data center network with routers, switches, VLANs, and routing protocols ensuring reliability and fault tolerance.",
-    tech: ["Cisco Packet Tracer", "Networking", "VLANs", "Routing"],
-    github: "https://github.com/YoussefAdel2004",
-    details: "#",
-    thumbnail: "bg-sky-500/20",
-    image: "/data-center.png",
-  },
-  {
-    title: "CS224N GPT-2 Multi-Task NLP System",
-    description: "Extended GPT-2 transformer for sentiment classification, paraphrase detection, and sonnet generation with improved classifier architecture.",
-    tech: ["PyTorch", "Transformers", "NLP", "Python"],
-    github: "https://github.com/YoussefAdel2004",
-    details: "#",
-    thumbnail: "bg-purple-500/20",
-  },
+  }
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-6 md:px-12 bg-card/30">
-      <div className="container mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Featured Projects</h2>
-          <div className="w-20 h-1.5 bg-primary mx-auto rounded-full mb-6"></div>
-          <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
-            A selection of my best work in AI, Machine Learning, and Software Engineering.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-background border border-border rounded-3xl overflow-hidden group hover:border-primary/50 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/5 flex flex-col h-full"
-            >
-              {/* Thumbnail / Image */}
-              <div className={`h-48 ${project.thumbnail} relative overflow-hidden flex items-center justify-center`}>
-                {project.image ? (
-                  <Image 
-                    src={project.image} 
-                    alt={project.title} 
-                    fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+    <div className="w-full">
+      <div className="flex flex-col gap-32 py-4">
+        {projects.map((project, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group relative rounded-[2.5rem] bg-black/5 dark:bg-card/10 backdrop-blur-md border border-border/60 overflow-hidden hover:border-primary/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 flex flex-col md:flex-row gap-0 md:gap-8"
+              >
+                {/* Image Section */}
+                <div className={`w-full md:w-[45%] lg:w-[40%] relative overflow-hidden ${isEven ? 'md:order-1' : 'md:order-2'} bg-black/5`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60 z-10" />
+                  
+                  <div className={`absolute inset-0 ${project.thumbnail} mix-blend-multiply opacity-40 group-hover:opacity-0 transition-opacity duration-700 z-10`} />
+                  
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-center aspect-video md:aspect-auto transition-transform duration-1000 group-hover:scale-110"
+                    loading="lazy"
                   />
-                ) : (
-                  <>
-                    <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-80" />
-                    <Layers className="w-16 h-16 text-foreground/20 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-500" />
-                  </>
-                )}
-              </div>
-              
-              <div className="p-8 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-foreground/70 mb-6 flex-1 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {project.tech.map((tech, i) => (
-                    <span key={i} className="text-xs font-medium px-2 py-1 bg-primary/10 text-primary rounded-md">
-                      {tech}
-                    </span>
-                  ))}
+                  
+                  {/* Subtle hover overlay glow */}
+                  <div className="absolute -inset-4 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-1000 -z-10" />
                 </div>
-                
-                <div className="flex items-center gap-4 mt-auto">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
-                  >
-                    <FaGithub size={18} />
-                    Code
-                  </a>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors ml-auto"
-                  >
-                    Details
-                    <ExternalLink size={18} />
-                  </a>
+
+                {/* Content Section */}
+                <div className={`w-full md:w-[55%] lg:w-[60%] p-8 md:p-12 lg:py-16 flex flex-col justify-center ${isEven ? 'md:order-2' : 'md:order-1'}`}>
+                  <h3 className="text-3xl md:text-4xl font-black text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-foreground/80 text-lg md:text-xl font-medium leading-relaxed mb-8 max-w-xl">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 md:gap-3 mb-10">
+                    {project.tech.map((tech, i) => (
+                      <span key={i} className="text-[10px] md:text-xs font-semibold px-3 py-1.5 md:px-4 md:py-2 bg-foreground/5 dark:bg-foreground/10 border border-foreground/10 text-foreground rounded-full shadow-sm">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-6">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center w-14 h-14 bg-foreground text-background rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg hover:shadow-primary/30 hover:-translate-y-1 group/btn"
+                    >
+                      <FaGithub size={24} className="group-hover/btn:scale-110 transition-transform" />
+                    </a>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-3 text-base font-bold text-foreground hover:text-primary transition-colors group/link"
+                    >
+                      View Live Project
+                      <span className="flex items-center justify-center w-8 h-8 rounded-full border border-border/60 group-hover/link:border-primary group-hover/link:bg-primary/10 transition-colors">
+                        <ExternalLink size={14} className="group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+                      </span>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
-    </section>
   );
 }
