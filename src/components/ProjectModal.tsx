@@ -13,6 +13,8 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -41,6 +43,29 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     setCurrentMediaIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEndHandler = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe) {
+      nextMedia();
+    }
+    if (isRightSwipe) {
+      prevMedia();
+    }
+  };
+
   return (
     <AnimatePresence>
       {project && (
@@ -65,7 +90,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 e.stopPropagation();
                 onClose();
               }}
-              className="absolute -top-12 right-0 md:-right-4 text-white hover:text-primary bg-black/50 hover:bg-black/80 rounded-full p-2 backdrop-blur-md transition-all duration-300 z-50 border border-white/10"
+              className="fixed top-4 right-4 md:absolute md:-top-12 md:-right-4 text-white hover:text-primary bg-black/50 hover:bg-black/80 rounded-full p-2 backdrop-blur-md transition-all duration-300 z-[110] border border-white/10 shadow-lg"
             >
               <X size={24} />
             </button>
@@ -79,7 +104,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               onClick={(e) => e.stopPropagation()}
             >
             {/* Left Column: Carousel */}
-            <div className="w-full lg:w-[65%] bg-black/60 relative group min-h-[300px] h-[40vh] lg:h-auto flex items-center justify-center overflow-hidden">
+            <div 
+              className="w-full lg:w-[65%] bg-black/60 relative group min-h-[300px] h-[40vh] lg:h-auto flex items-center justify-center overflow-hidden"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEndHandler}
+            >
               {gallery.map((media, index) => (
                 <div
                   key={index}
