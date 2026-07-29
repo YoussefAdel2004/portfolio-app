@@ -53,7 +53,7 @@ Make sure you have Node.js installed (v18 or higher is recommended).
 
 Feel free to reach out for collaborations or just a friendly chat!
 - **Email:** youssefelkess8@gmail.com
-- **LinkedIn:** [Youssef Adel](https://linkedin.com/in/youssef-adel-125026217/)
+- **LinkedIn:** [Youssef Adel](https://www.linkedin.com/in/youssef-adel-ab91562b7/)
 - **GitHub:** [YoussefAdel2004](https://github.com/YoussefAdel2004)
 
 ---
