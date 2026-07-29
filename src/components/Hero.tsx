@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -95,6 +95,18 @@ export default function Hero() {
               className="p-3 bg-card border border-border rounded-full text-foreground/80 hover:text-primary hover:border-primary transition-all"
             >
               <FaLinkedin size={24} />
+            </a>
+            <a
+              href="https://www.instagram.com/webvision_224/"
+              target="_blank"
+              rel="noreferrer"
+              className="group relative flex items-center gap-2 px-5 py-3 rounded-full overflow-hidden backdrop-blur-md bg-background/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="absolute inset-0 -z-20 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500" />
+              <div className="absolute inset-[1px] -z-10 bg-background/90 backdrop-blur-xl rounded-full" />
+              
+              <FaInstagram size={24} className="text-pink-500 group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-sm bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-orange-500 pr-1">See My Work</span>
             </a>
           </div>
         </motion.div>
